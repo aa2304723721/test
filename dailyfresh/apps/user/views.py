@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from user.models import User
 from django.core.mail import send_mail
 
+
 from django.views.generic import View
 from django.http import HttpResponse
 from celery_tasks.tasks import send_register_active_email
@@ -258,3 +259,21 @@ class LoginView(View):
             # 用户名或密码错误
             return render(request, "login.html", {"error": "用户名或密码错误"})
 
+
+class UserInfoView(View):
+    '''用户中心-信息页'''
+    def get(self,request):
+        '''显示'''
+        return render(request,"user_center_info.html",{"page":"user"})
+
+class UserOrderView(View):
+    '''用户中心-订单页'''
+    def get(self,request):
+        '''显示'''
+        return render(request,"user_center_order.html",{"page":"order"})
+
+class AddressView(View):
+    '''用户中心-地址页'''
+    def get(self,request):
+        '''显示'''
+        return render(request,"user_center_site.html",{"page":"address"})

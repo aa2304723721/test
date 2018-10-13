@@ -119,6 +119,18 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
+
+# 配置session储存到redis
+SESSION_ENGINE = "redis_sessions.session"
+SESSION_REDIS_HOST = "192.168.12.232"
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 2
+SESSION_REDIS_PASSWORD = ""
+SESSION_REDIS_PREFIX = "session"
+
+
+
+
 # 发送邮件配置
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 # smpt服务地址
