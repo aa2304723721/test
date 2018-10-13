@@ -12,6 +12,7 @@ import re
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 from django.contrib.auth import authenticate,login
+from utils.mixin import LoginRequiredMixin
 
 
 # Create your views here.
@@ -242,9 +243,10 @@ class LoginView(View):
                 login(request, user)
 
                 # 获取登录后所要跳转的地址
+                # 跳转到首页
                 next_url = request.GET.get("next",reverse("goods:index"))
 
-                # 跳转到首页
+                # 跳转到next_url
                 response=redirect(next_url)
 
                 # 判断是否记住用户名
@@ -263,19 +265,19 @@ class LoginView(View):
             return render(request, "login.html", {"error": "用户名或密码错误"})
 
 
-class UserInfoView(View):
+class UserInfoView(LoginRequiredMixin,View):
     '''用户中心-信息页'''
     def get(self,request):
         '''显示'''
         return render(request,"user_center_info.html",{"page":"user"})
 
-class UserOrderView(View):
+class UserOrderView(LoginRequiredMixin,View):
     '''用户中心-订单页'''
     def get(self,request):
         '''显示'''
         return render(request,"user_center_order.html",{"page":"order"})
 
-class AddressView(View):
+class AddressView(LoginRequiredMixin,View):
     '''用户中心-地址页'''
     def get(self,request):
         '''显示'''
