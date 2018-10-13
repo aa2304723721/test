@@ -143,4 +143,5 @@ EMAIL_HOST_PASSWORD='z17025'
 # 收件人看到的发件人
 EMAIL_FROM='天天生鲜<z31926990@163.com>'
 
-
+# 配置登录url地址
+LOGIN_URL='/user/login'
