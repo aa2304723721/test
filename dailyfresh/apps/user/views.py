@@ -11,7 +11,7 @@ from django.conf import settings
 import re
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from utils.mixin import LoginRequiredMixin
 
 
@@ -263,6 +263,17 @@ class LoginView(View):
         else:
             # 用户名或密码错误
             return render(request, "login.html", {"error": "用户名或密码错误"})
+
+
+class LogoutView(View):
+    '''退出登录'''
+    def get(self,request):
+        '''退出登录'''
+        # 清除用户的session信息
+        logout(request)
+
+        # 跳转到首页
+        return redirect(reverse("goods:index"))
 
 
 class UserInfoView(LoginRequiredMixin,View):
