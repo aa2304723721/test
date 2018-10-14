@@ -282,10 +282,12 @@ class UserInfoView(LoginRequiredMixin,View):
         '''显示'''
 
         # 获取用户个人信息
+        user = request.user
+        address = Address.objects.get_default_address(user)
 
         # 获取用户的历史浏览记录
 
-        return render(request,"user_center_info.html",{"page":"user"})
+        return render(request,"user_center_info.html",{"page":"user","address":address})
 
 class UserOrderView(LoginRequiredMixin,View):
     '''用户中心-订单页'''
