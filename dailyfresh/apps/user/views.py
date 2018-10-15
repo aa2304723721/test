@@ -13,6 +13,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 from django.contrib.auth import authenticate,login,logout
 from utils.mixin import LoginRequiredMixin
+from goods.models import GoodsSKU
 
 
 # Create your views here.
@@ -286,8 +287,33 @@ class UserInfoView(LoginRequiredMixin,View):
         address = Address.objects.get_default_address(user)
 
         # 获取用户的历史浏览记录
+        from redis import StrictRedis
+        sr = StrictRedis(host="192.168.12.232",port="6379",db=2)
 
-        return render(request,"user_center_info.html",{"page":"user","address":address})
+        history_key="history_%d"%user.id
+
+        # 获取用户的最新浏览的5个商品的id
+        sku_ids = sr.lrange(history_key,0,4)
+
+        # # 从数据库中查询用户浏览的商品的具体信息
+        # goods_li=GoodsSKU.objects.filter(id__in=sku_ids)
+        #
+        # goods_res = []
+        # for a_id in sku_ids:
+        #     for goods in goods_li:
+        #         if a_id == goods.id:
+        #             goods_res.append(goods)
+
+        # 遍历获取用户的浏览的历史商品信息
+        goods_li = []
+        for id in sku_ids:
+            goods = GoodsSKU.objects.get(id=id)
+            goods_li.append(goods)
+
+        context={"page":"user","address":address,"goods_li":goods_li}
+
+
+        return render(request,"user_center_info.html",context)
 
 class UserOrderView(LoginRequiredMixin,View):
     '''用户中心-订单页'''
