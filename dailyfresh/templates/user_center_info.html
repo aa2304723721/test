@@ -6,11 +6,11 @@
 						<ul class="user_info_list">
 							<li><span>用户名：</span>{{ user.username }}</li>
                             {% if address %}
-							<li><span>联系方式：</span>{{ address.phone }}</li>
-							<li><span>联系地址：</span>{{ address.addr }}</li>
+                                <li><span>联系方式：</span>{{ address.phone }}</li>
+                                <li><span>联系地址：</span>{{ address.addr }}</li>
                             {% else %}
-                                <li><span>联系方式：</span>无默认联系方式</li>
-							    <li><span>联系地址：</span>无默认联系地址</li>
+                                <li><span>联系方式：</span>无默认</li>
+							    <li><span>联系地址：</span>无默认</li>
                             {% endif %}
 						</ul>
 				</div>
@@ -20,8 +20,8 @@
 					<ul class="goods_type_list clearfix">
                         {% for goods in goods_li %}
 				        <li>
-                            <a href="detail.html"><img src="{{ goods.image.url }}"></a>
-                            <h4><a href="detail.html">{{ goods.name }}</a></h4>
+                            <a href="{% url 'goods:detail' goods.id %}"><img src="{{ goods.image.url }}"></a>
+                            <h4><a href="{% url 'goods:detail' goods.id %}">{{ goods.name }}</a></h4>
                             <div class="operate">
                                 <span class="prize">￥{{ goods.price }}</span>
                                 <span class="unit">{{ goods.price }}/{{ goods.unite }}</span>
@@ -29,7 +29,7 @@
                             </div>
                         </li>
                         {% empty %}
-                            <b>无历史浏览记录 </b>
+                            无历史浏览记录
                         {% endfor %}
 			        </ul>
 		        </div>

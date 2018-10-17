@@ -222,7 +222,7 @@ class LoginView(View):
             checked =''
 
         # 使用模板
-        return render(request, "login.html",{"username":username,"checked":checked})
+        return render(request, "login.html", {"username":username, "checked":checked})
 
     def post(self, request):
         '''登录校验'''
@@ -313,7 +313,7 @@ class UserInfoView(LoginRequiredMixin,View):
         context={"page":"user","address":address,"goods_li":goods_li}
 
 
-        return render(request,"user_center_info.html",context)
+        return render(request, "user_center_info.html", context)
 
 class UserOrderView(LoginRequiredMixin,View):
     '''用户中心-订单页'''
@@ -321,7 +321,7 @@ class UserOrderView(LoginRequiredMixin,View):
         '''显示'''
         # 获取用户的订单信息
 
-        return render(request,"user_center_order.html",{"page":"order"})
+        return render(request, "user_center_order.html", {"page": "order"})
 
 class AddressView(LoginRequiredMixin,View):
     '''用户中心-地址页'''
@@ -338,7 +338,7 @@ class AddressView(LoginRequiredMixin,View):
         address=Address.objects.get_default_address(user)
 
         # 使用模板
-        return render(request,"user_center_site.html",{"page":"address","address":address})
+        return render(request, "user_center_site.html", {"page": "address", "address":address})
 
     def post(self,request):
         '''地址添加'''
@@ -350,11 +350,11 @@ class AddressView(LoginRequiredMixin,View):
 
         # 校验数据
         if not all([receiver,addr,phone]):
-            return render(request,"user_center_site.html",{"error":"数据不完整"})
+            return render(request, "user_center_site.html", {"error": "数据不完整"})
 
         # 校验手机号
         if not re.match(r"^1[3|4|5|7|8][0-9]{9}$",phone):
-            return render(request,"user_center_site.html",{"error":"手机号码格式不正确"})
+            return render(request, "user_center_site.html", {"error": "手机号码格式不正确"})
 
         # 业务处理：地址添加
         # 获取登录用户对应User对象

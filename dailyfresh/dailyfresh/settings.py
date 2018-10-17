@@ -16,7 +16,6 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -144,16 +143,26 @@ EMAIL_HOST_PASSWORD='z17025'
 EMAIL_FROM='天天生鲜<z31926990@163.com>'
 
 # Django的缓存配置
-CACHES = {
-    "default": {
-        "BACKEND":"django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.12.232:6379/2",
-        "OPTIONS": {
-            "CLIENT_CLASS":"django_redis.client.DefaultClient",
-        }
-
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND":"django_redis.cache.RedisCache",
+#         "LOCATION": "redis://192.168.12.232:6379/2",
+#         "OPTIONS": {
+#             "CLIENT_CLASS":"django_redis.client.DefaultClient",
+#         }
+#
+#     }
+# }
 
 # 配置登录url地址
 LOGIN_URL='/user/login'
+
+# 设置Django的文件存储类
+DEFAULT_FILE_STORAGE="utils.fdfs.storage.FDFSStorage"
+
+
+# 设置fdfs使用的client.conf路径
+FDFS_CLIENT_CONF="./utils/fdfs/client.conf"
+
+# 设置fdfs存储服务器上nginx的IP和端口号
+FDFS_URL="http://192.168.12.232:7777/"
