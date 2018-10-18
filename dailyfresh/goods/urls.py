@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from goods.views import IndexView
+from django import views
 
 
 urlpatterns = [
