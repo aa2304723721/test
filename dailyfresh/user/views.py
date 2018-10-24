@@ -190,7 +190,7 @@ class ActiveView(View):
         '''进行用户激活'''
         # 进行解密，获取要激活的用户信息
 
-        serializer = Serializer(settings.SECRET_KEY, 600)
+        serializer = Serializer(settings.SECRET_KEY, 3600)
         try:
             info = serializer.loads(token)
             # 获取待激活用户的id
