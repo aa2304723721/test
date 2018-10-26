@@ -42,7 +42,7 @@ class GoodsSKU(BaseModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.type.name
+        return self.name
 
 
 class Goods(BaseModel):
@@ -61,7 +61,7 @@ class Goods(BaseModel):
 
 class GoodsImage(BaseModel):
     '''商品图片模型类'''
-    sku = models.ForeignKey('GoodsSKU', verbose_name='商品')
+    sku = models.ForeignKey('GoodsSKU', verbose_name='商品SKU')
     image = models.ImageField(upload_to='goods', verbose_name='图片路径')
 
     class Meta:
