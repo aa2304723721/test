@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't86*&u31rliheqh6(kq$l=s4+s3yk5v0e66--vl8*zx9gs#6+='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -181,5 +181,10 @@ HAYSTACK_CONNECTIONS = {
 
 #当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+# 配置收集静态文件的路径
+STATIC_ROOT='/var/www/dailyfresh/static'
+
 
 
